@@ -72,7 +72,7 @@ def form_query(user, scheduled):
     """
     query = f"from:{user}"
     if scheduled is not None:
-        query += f"since:{int(scheduled)}"
+        query += f" since:{int(scheduled)}"
 
     search_options = [('count', 5 if scheduled is None else 100), ('cursor', -1), ('tweet_search_mode', 'live'),
                       ('include_profile_interstitial_type', '1'), ('include_blocking', '1'),

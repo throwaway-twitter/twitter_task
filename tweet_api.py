@@ -1,11 +1,15 @@
 import json
 import os
-
+import logging
 from flask import Flask, jsonify
 
 app = Flask(__name__)
 
 json_data = []
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 
 def run_flask():
     os.environ['WERKZEUG_RUN_MAIN'] = 'true'  # Suppress startup messages in stdout
