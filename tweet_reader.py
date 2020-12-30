@@ -1,15 +1,16 @@
 #  Inspiration for the task taken from # https://code.recuweb.com/2015/scraping-tweets-directly-from-twitter-without-authentication/#twitters-advanced-search-without-being-logged
 
+import argparse
+import datetime
 import json
-import os
 import re
 import threading
-from urllib.parse import urlencode
-from urllib.parse import quote
-import requests
-import datetime
 import time
-import argparse
+from urllib.parse import quote
+from urllib.parse import urlencode
+
+import requests
+
 from tweet_api import run_flask, save_json
 
 MINUTES_TO_SECONDS = 60
