@@ -8,3 +8,4 @@
 5. Twitter's search service and, by extension, the Search API is not meant to be an exhaustive source of Tweets. Not all Tweets will be indexed or made available via the search interface --- https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
 6. Tweet collection is assumed to have a negligible response time and is not factored into the 10 minute collection (i.e. if tweet collection always took 1 second, the program would actually run 10 minutes and 1 second apart)
 7. To avoid confusion with updated tweets pushing more recent items to the bottom of stdout, tweets will be printed from least recent to most recent. 
+8. Assume that starting program again will remove previous collected tweets and that the programs memory is sufficent to hold JSON formatted data from the user (Otherwise conversion to another format is required)

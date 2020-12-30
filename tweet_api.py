@@ -1,19 +1,28 @@
+import json
 import os
-from flask import Flask, stream_with_context, request, Response
+
+from flask import Flask, jsonify
+
 app = Flask(__name__)
 
+json_data = []
 
 def run_flask():
     os.environ['WERKZEUG_RUN_MAIN'] = 'true'  # Suppress startup messages in stdout
     app.run()
 
 
+def save_json(data):
+    """
+    Simple function to store json List data to memory
+    :param data: JSON data to write to file
+    :return: None
+    """
+    json_data.extend(data)
+
+
+
 @app.route('/tweets')
-def streamed_response():
-    @stream_with_context
-    def generate():
-        yield "test"
-        yield " "
-        yield request.args.get("user", "No user specified")
-    return Response(generate())
+def json_response():
+    return jsonify(json_data)
 

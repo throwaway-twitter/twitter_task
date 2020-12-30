@@ -1,6 +1,7 @@
 #  Inspiration for the task taken from # https://code.recuweb.com/2015/scraping-tweets-directly-from-twitter-without-authentication/#twitters-advanced-search-without-being-logged
 
 import json
+import os
 import re
 import threading
 from urllib.parse import urlencode
@@ -9,9 +10,10 @@ import requests
 import datetime
 import time
 import argparse
-from tweet_api import run_flask
+from tweet_api import run_flask, save_json
 
 MINUTES_TO_SECONDS = 60
+
 
 def get_user_agent():
     """
@@ -117,8 +119,15 @@ if __name__ == "__main__":
         pre_execution_timestamp = datetime.datetime.now().timestamp()
         url = form_query(args.username, scheduled_time)
         response = request(url).text
-        for tweet in reversed(read_tweets(response)):
+
+        tweet_list = read_tweets(response)
+        tweet_list.reverse()
+
+        save_json(tweet_list)
+
+        for tweet in tweet_list:
             print(tweet['created_at'] + " : " + tweet['full_text'])
+
         time.sleep(args.frequency * MINUTES_TO_SECONDS)
         scheduled_time = pre_execution_timestamp
 
