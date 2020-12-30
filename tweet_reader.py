@@ -2,12 +2,14 @@
 
 import json
 import re
+import threading
 from urllib.parse import urlencode
 from urllib.parse import quote
 import requests
 import datetime
 import time
 import argparse
+from tweet_api import run_flask
 
 MINUTES_TO_SECONDS = 60
 
@@ -108,6 +110,8 @@ if __name__ == "__main__":
     parser.add_argument("-f", "--frequency", type=int, help="polling frequency in minutes", default=10)
     args = parser.parse_args()
 
+    threading.Thread(target=run_flask).start()  # Init flask to serve rest api queries in a new thread
+
     scheduled_time = None
     while True:
         pre_execution_timestamp = datetime.datetime.now().timestamp()
@@ -117,3 +121,4 @@ if __name__ == "__main__":
             print(tweet['created_at'] + " : " + tweet['full_text'])
         time.sleep(args.frequency * MINUTES_TO_SECONDS)
         scheduled_time = pre_execution_timestamp
+
