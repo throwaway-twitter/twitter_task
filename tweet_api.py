@@ -9,7 +9,7 @@ json_data = []
 
 def run_flask():
     os.environ['WERKZEUG_RUN_MAIN'] = 'true'  # Suppress startup messages in stdout
-    app.run()
+    app.run(host='0.0.0.0')
 
 
 def save_json(data):

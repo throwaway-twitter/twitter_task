@@ -1,5 +1,16 @@
 # twitter_task
 
+
+# To build the container
+```
+docker build -t tweet_reader:latest .
+```
+
+# To Run the container (for example with twitter user foxnews)
+```
+docker run -it -p 5000:5000 tweet_reader -u "foxnews"
+```
+
 # ASSUMPTIONS
 1. The bulk of the task was to find a way to circumvent the authentication requirements from the official API's since a core requirement was "Make sure to use scraping or APIs that do not require user authentication or a twitter developer account." At the time of writing,v1.1 and v2 of the API both require user authentication. This means that a more elegant and strictly supported solution was sacrificed in adherence to the core requirement.
 2. Only the tweet text and createtime is important to display to stdout. The API option will however print the full details
